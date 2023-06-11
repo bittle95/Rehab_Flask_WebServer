@@ -1,0 +1,38 @@
+<!DOCTYPE html> <!--Ctrl + Alt + i 로 자동 정렬-->
+<html lang="en">
+    <head>
+        <meta charset='utf-8' />
+        <meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no' />
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    </head>
+<body>
+    <div class = "container">
+        <div class="row mt-5">
+            <h1>국립재활원 콘텐츠 관리 프로그램</h1>
+        </div>
+
+ <img src="https://kmug.co.kr/data/file/demand/data_demand_%EA%B5%AD%EB%A6%BD%EC%9E%AC%ED%99%9C%EC%9B%90_%EA%B5%AD%EC%98%81%ED%98%BC%ED%95%A9_%EC%A2%8C%EC%9A%B0_1%ED%96%89.jpg", width = "600", height="300">
+ <img src="https://www.koreatech.ac.kr/resources/homepage/kor/_Img/Content/signature_img01.jpg", width = "600", height="170">
+        <div class="col-12">
+            </br></br>
+            <form method="POST" action="/admin">
+                <button type="submit" class="btn btn-primary"style="font-size: 3em;" style="padding: 50px 30px 50px 30px" >콘텐츠 관리자 모드</button>
+            </form>
+
+            <!--/br></br>
+            <form method="POST" action="/operate">
+                <button type="submit" class="btn btn-primary"style="font-size: 3em;" style="padding: 50px 30px 50px 30px" >콘텐츠 운영 모드</button>
+            </form-->
+            </br></br>
+            <form method="POST" action="/data">
+                <input type="hidden" name="user_index" value="1">
+                <button type="submit" class="btn btn-primary"style="font-size: 3em;" style="padding: 50px 30px 50px 30px" >데이터 관리</button>
+            </form>
+            </br></br>
+        </div>
+        </div>
+</body>
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset='utf-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no' />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row mt-2" float="left">
+        <form method="GET" action="/" style="margin:0">
+            <button type="submit" class="btn btn-primary" style="font-size: 1.5em;">⮌메인 메뉴</button>
+                        <br><br>
+        </form>
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        <form method="POST" action="/content/reset" style="margin:0">
+            <button type="submit" class="btn btn-primary" style="font-size: 1.5em;">콘텐츠 종료 후 메인 메뉴</button>
+        </form>
+        </br></br>
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        <form method="POST" action="/content/changebtn" style="margin:0">
+            <button type="submit" class="btn btn-primary" style="font-size: 1.5em;">(콘텐츠#3) 발 위치 변경 </button>
+            <br><br>
+        </form>
+        </br></br>
+
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        <form method="POST" action="/debugmode">
+            <input type="hidden" name="user_index" value="1">
+            <button type="submit" class="btn btn-primary"style="font-size: 1.5em;" style="padding: 50px 30px 50px 30px" >디버그 모드</button>
+        </form>
+    </div>
+</div>
+<div class = "container">
+    <div class="col-12">
+        <br>
+        <form method="POST" action="/LoadSettings">
+            <input type="hidden" name="user_index" value="1">
+            <button type="submit" class="btn btn-primary" style="font-size: 1.3em;" style="padding: 50px 30px 50px 20px">세팅 불러오기</button>
+        </form> <br>
+
+        <form method="POST" action="/admin/config">
+            <div class="form-group" style="width:300px; height:80px; margin-right:10px;">
+                <div class="row mt-2">
+                    <h2>보행자 이름</h2>
+                </div>
+                <input type="text" class="form-control" id="patient_name" placeholder="신규 사용자 등록" name="patient_name"/>
+            </div>
+
+            <div class="form-group"  style="width:300px; height:80px; float:left; margin-right:10px;">
+                <!--label>보행자 보폭(mm)</label-->
+                <div class="row mt-2">
+                    <h2>보행자 보폭(mm)</h2>
+                </div>
+                <input type="number" class="form-control" id="patient_stride" placeholder="200 권장" name="patient_stride" value="200"/>
+            </div>
+
+            <div class="form-group" style="width:300px; height:80px; margin-right:10px;">
+                <!--label>보행자 보행 너비(mm)</label-->
+                <div class="row mt-2">
+                    <h2>보행자 보행 너비(mm)</h2>
+                </div>
+                <input type="number" class="form-control" id="patient_width" placeholder="150 권장" name="patient_width" value="150" />
+            </div><br><br><br><br>
+
+            <div class="form-group" style="width:300px; height:80px; margin-right:10px;">
+                <div class="row mt-2">
+                    <h2>보행자 나이</h2>
+                </div>
+                <input type="number" class="form-control" id="patient_age" name="patient_age" placeholder="나이 입력"/>
+            </div>
+
+
+            <div class="form-group">
+                <div class="row mt-2">
+                    <h2>난이도</h2>
+                </div>
+<!--overlapping_area-->
+                <input type="radio" name="difficulty" value="0" checked="checked" style="width:20px;height:20px;border:10px;">하
+                &nbsp;
+                <input type="radio" name="difficulty" value="1" style="width:20px;height:20px;border:10px;" >상
+                &nbsp;
+                <br>
+
+                <table
+                        border="1"
+                        width="90%"
+                        height="120"
+                        cellspacing="2">
+                    <caption>참조</caption>
+
+                    <thead>
+                    <tr align="center" bgcolor="white">
+                        <td></td>
+                        <th>콘텐츠#1</th>
+                        <th>콘텐츠#2</th>
+                        <th>콘텐츠#3</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr align="left" bgcolor="white">
+                        <th>난이도 하</th>
+                        <td>교차영역 15%</td>
+                        <td>교차영역 15% <br> 전방보행 유도시간 40초 <br> 포탈 양 옆 이동량 0cm </td>
+                        <td>교차영역 15% <br> 피해야할 운석 수(1페이즈 당) : 15개 <br> 획득해야할 총 선물 수(1페이즈 당) : 15개 </td>
+                    </tr>
+                    <tr align="left" bgcolor="white">
+                        <th>난이도 상</th>
+                        <td>교차영역 30%</td>
+                        <td>교차영역 30% <br> 전방보행 유도시간 30초 <br> 포탈 양 옆 위치 이동량 5cm </td>
+                        <td>교차영역 30% <br> 피해야할 운석 수(1페이즈 당) : 20개 <br> 획득해야할 총 선물 수(1페이즈 당) : 20개 </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+
+            <div class="form-group">
+                <!--label>콘텐츠 거리 (M)</label-->
+                <div class="row mt-2">
+                    <h2>콘텐츠 거리(M)</h2>
+                </div>
+                <input type="radio" name="distance" value="5" checked="checked" style="width:20px;height:20px;border:10px;">5m
+                &nbsp;
+                <input type="radio" name="distance" value="10" style="width:20px;height:20px;border:10px;">10m
+                &nbsp;
+                <!--input type="radio" name="distance" value="20" style="width:20px;height:20px;border:10px;"-->
+            </div>
+
+
+            <div class="form-group">
+                <div class="row mt-2">
+                    <h2>콘텐츠 종류 선택</h2>
+                </div>
+                <input type="radio" name="chk_info" value="1" checked="checked" style="width:20px;height:20px;border:10px;">콘텐츠#1
+                &nbsp
+                <input type="radio" name="chk_info" value="2" style="width:20px;height:20px;border:10px;">콘텐츠#2
+                &nbsp
+                <input type="radio" name="chk_info" value="3" style="width:20px;height:20px;border:10px;">콘텐츠#3
+                &nbsp
+                <br>
+
+            </div>
+
+            <div class="form-group" style="width:300px; height:70px;  margin-right:10px;">
+                <!--label>보행자 성별</label-->
+                <div class="row mt-2">
+                    <h2>보행자 성별</h2>
+                </div>
+                <input type="radio" name="sex" value="1" style="width:20px;height:20px;border:10px;" checked="checked">남성
+                &nbsp
+                <input type="radio" name="sex" value="0" style="width:20px;height:20px;border:10px;">여성
+            </div>
+
+            <div class="form-group" style="width:300px; height:80px; float:left; margin-right:10px;">
+                <!--label>보행자 발 사이즈</label-->
+                <div class="row mt-2">
+                    <h2>보행자 발 사이즈(mm)</h2>
+                </div>
+                <input type="number" class="form-control" id="foot_size" placeholder="발 사이즈 입력" name="foot_size"/>
+            </div>
+            <br></br>
+
+            <div class="form-group" style="width:300px; height:80px; margin-right:10px;">
+                <!--label>보행자 GMFCS 레벨</label-->
+                <div class="row mt-6">
+                    <h2>보행자 GMFCS 레벨</h2>
+                </div>
+                <input type="radio" name="severe" value="1" style="width:20px;height:20px;border:10px;" checked="checked"> 1단계
+                &nbsp
+                <input type="radio" name="severe" value="2" style="width:20px;height:20px;border:10px;" > 2단계
+                &nbsp
+                <input type="radio" name="severe" value="3" style="width:20px;height:20px;border:10px;" > 3단계
+                <br>
+            </div>
+            <br> <br>
+            <form method="POST" action="/admin/config">
+                <button type="submit" class="btn btn-primary" style="font-size: 2em;" style="padding: 50px 20px 50px 20px">콘텐츠 설정 완료</button>
+            </form>
+        </form>
+    </div>
+</div>
+
+<div class = "container">
+
+</div>
+
+</body>
+</html>

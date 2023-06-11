@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset='utf-8' />
+        <meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no' />
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    </head>
+<body>
+    <div class="container">
+        <div class="row mt-2" float="left">
+            <form method="POST" action="/admin" style="margin:5">
+                <button type="submit" class="btn btn-primary" style="font-size: 1.5em;">⮌뒤로</button>
+            </form>
+            &nbsp; &nbsp;
+            <form method="GET" action="/" style="margin:0">
+                <button type="submit" class="btn btn-primary" style="font-size: 1.5em;">메인 메뉴</button>
+            </form>
+        </div>
+    </div>
+    <div class = "container">
+        <div class="row mt-5">
+            <h3><b>불러올 설정값 선택</b></h3>
+        </div>
+        </br>
+        <form method="POST" action="/LoadSettings">
+            <select name=user_index style="width:200px;height:40px;">
+                {% for user_name in user_name_list %}
+                    {% set string_list = user_name.split(':') %}
+                    {% if (string_list[0] == selected_index) %}
+                        <option value= "{{string_list[0]}}" SELECTED>{{user_name}}</option>"
+                    {% else %}
+                        <option value= "{{string_list[0]}}">{{user_name}}</option>"
+                    {% endif %}
+                {% endfor %}
+
+            </select>
+            &nbsp;
+            &nbsp;
+            <button type="submit" class="btn btn-primary" style="font-size: 1em;" style="padding: 50px 30px 50px 20px">불러오기</button>
+        </form>
+
+        <form method="POST" action="/LoadSettings/config">
+            <div class="row mt-5">
+                <h3><b>기존 설정값</b></h3>
+            </div>
+            <h4>ID: {{user_info[0]}}</h4>
+            <div class="form-group" style="width:300px; height:80px; margin-right:10px;">
+                <h4>보행자 이름</h4>
+                <input type="text" class="form-control" id="patient_name1" name="patient_name1" value="{{user_info[1]}}"/>
+            </div>
+            <div class="form-group" style="width:300px; height:80px; margin-right:10px;">
+                <h4>보행 보폭</h4>
+                <input type="text" class="form-control" id="patient_stride1" name="patient_stride1" value="{{result_list[-1][11]}}"/>
+            </div>
+            <div class="form-group" style="width:300px; height:80px; margin-right:10px;">
+                <h4>보행 너비</h4>
+                <input type="text" class="form-control" id="patient_width1" name="patient_width1" value="{{result_list[-1][12]}}"/>
+            </div>
+            <div class="form-group" style="width:300px; height:80px; margin-right:10px;">
+                <h4>보행자 나이</h4>
+                <input type="text" class="form-control" id="patient_age1" name="patient_age1" value="{{user_info[5]}}"/>
+            </div>
+            <div class="form-group" style="width:300px; height:80px; margin-right:10px;">
+                <h4>난이도</h4>
+                {% if result_list[-1][3] == 1 %}
+                    <input type="radio" name="difficulty1" value="1" checked="checked" style="width:20px;height:20px;border:10px;" >상 &nbsp;
+                    <input type="radio" name="difficulty1" value="0" style="width:20px;height:20px;border:10px;">하 &nbsp;
+                {% else %}
+                    <input type="radio" name="difficulty1" value="1" style="width:20px;height:20px;border:10px;" >상   &nbsp;
+                    <input type="radio" name="difficulty1" value="0" checked="checked" style="width:20px;height:20px;border:10px;">하
+                {% endif %}
+            </div>
+
+            <div class="form-group" style="width:300px; height:80px; margin-right:10px;">
+                <h4>콘텐츠 거리</h4>
+                {% if result_list[-1][2] == 5 %}
+                    <input type="radio" name="distance1" value="5" checked="checked" style="width:20px;height:20px;border:10px;">5 &nbsp;
+                    <input type="radio" name="distance1" value="10" style="width:20px;height:20px;border:10px;">10 &nbsp;
+                    <!--input type="radio" name="distance1" value="20" style="width:20px;height:20px;border:10px;"--> &nbsp;
+                {% elif result_list[-1][2] == 10 %}
+                    <input type="radio" name="distance1" value="5" style="width:20px;height:20px;border:10px;">5 &nbsp;
+                    <input type="radio" name="distance1" value="10"  checked="checked" style="width:20px;height:20px;border:10px;">10 &nbsp;
+                    <!--input type="radio" name="distance1" value="20" style="width:20px;height:20px;border:10px;"--> &nbsp;
+                {% else %}
+                    <!--input type="radio" name="distance1" value="5" style="width:20px;height:20px;border:10px;">5 &nbsp;
+                    <input type="radio" name="distance1" value="10" style="width:20px;height:20px;border:10px;">10 &nbsp;
+                    <input type="radio" name="distance1" value="20" checked="checked"  style="width:20px;height:20px;border:10px;"--> &nbsp;
+                {% endif %}
+            </div>
+
+            <div class="form-group" style="width:300px; height:80px; margin-right:10px;">
+                <h4>콘텐츠 종류</h4>
+                {% if result_list[-1][1] == 1 %}
+                    <input type="radio" name="chk_info1" value="1" checked="checked" style="width:20px;height:20px;border:10px;"> 1 &nbsp;
+                    <input type="radio" name="chk_info1" value="2" style="width:20px;height:20px;border:10px;"> 2 &nbsp;
+                    <input type="radio" name="chk_info1" value="3" style="width:20px;height:20px;border:10px;"> 3
+                {% elif result_list[-1][1] == 2 %}
+                    <input type="radio" name="chk_info1" value="1" style="width:20px;height:20px;border:10px;"> 1 &nbsp;
+                    <input type="radio" name="chk_info1" value="2" checked="checked" style="width:20px;height:20px;border:10px;"> 2 &nbsp;
+                    <input type="radio" name="chk_info1" value="3" style="width:20px;height:20px;border:10px;"> 3
+                {% else %}
+                    <input type="radio" name="chk_info1" value="1" style="width:20px;height:20px;border:10px;"> 1 &nbsp;
+                    <input type="radio" name="chk_info1" value="2" style="width:20px;height:20px;border:10px;"> 2 &nbsp;
+                    <input type="radio" name="chk_info1" value="3" checked="checked" style="width:20px;height:20px;border:10px;"> 3
+                {% endif %}
+            </div>
+            <div class="form-group" style="width:300px; height:80px; margin-right:10px;">
+                <h4>성별</h4>
+                <input type="radio" name="sex1" value="{{user_info[2]}}" checked="checked" style="width:20px;height:20px;border:10px;">{{user_info[2]}}
+            </div>
+
+            <div class="form-group" style="width:300px; height:80px; margin-right:10px;">
+                <h4>발 사이즈</h4>
+                <input type="text" class="form-control" id="foot_size1" name="foot_size1" value="{{user_info[3]}}"/>
+            </div>
+
+            <div class="form-group" style="width:300px; height:80px; margin-right:10px;">
+                <h4>GMFCS 레벨</h4>
+                {% if user_info[4] == 1 %}
+                    <input type="radio" name="severe1" value="1" style="width:20px;height:20px;border:10px;" checked="checked" > 1 &nbsp;
+                    <input type="radio" name="severe1" value="2" style="width:20px;height:20px;border:10px;"> 2 &nbsp;
+                    <input type="radio" name="severe1" value="3" style="width:20px;height:20px;border:10px;"> 3
+                {% elif user_info[4] == 2 %}
+                    <input type="radio" name="severe1" value="1" style="width:20px;height:20px;border:10px;"> 1 &nbsp;
+                    <input type="radio" name="severe1" value="2" style="width:20px;height:20px;border:10px;" checked="checked" > 2
+                    <input type="radio" name="severe1" value="3" style="width:20px;height:20px;border:10px;"> 3
+                {%else%}
+                    <input type="radio" name="severe1" value="1" style="width:20px;height:20px;border:10px;"> 1 &nbsp;
+                    <input type="radio" name="severe1" value="2" style="width:20px;height:20px;border:10px;"> 2
+                    <input type="radio" name="severe1" value="3" style="width:20px;height:20px;border:10px;" checked="checked" > 3
+                {% endif %}
+            </div>
+            </br>
+            <form method="POST" action="/LoadSettings/config">
+                <button type="submit" class="btn btn-primary" style="font-size: 2em;" style="padding: 50px 20px 50px 20px">콘텐츠 설정 완료</button>
+            </form>
+        </form>
+        <!--디버깅용 테이블-->
+        <!--div class="row mt-5">
+            <h3><b>환자 정보</b></h3>
+        </div>
+        <h6>ID: {{user_info[0]}}</h6>
+        <h6>이름: {{user_info[1]}}</h6>
+        <h6>성별: {{user_info[2]}}</h6>
+        <h6>발 사이즈: {{user_info[3]}}</h6>
+        <h6>중증도: {{user_info[4]}}</h6>
+        <h6>나이: {{user_info[5]}}</h6>
+        <div class="row mt-5">
+            <h3><b>훈련 기록</b></h3>
+            &nbsp;
+            &nbsp;
+            <form method="POST" action="/data/download" style="margin:0">
+                <input type="hidden" name="user_index" value={{selected_index}}>
+                <button type="submit" class="btn btn-primary" style="font-size: 1em;">Export .csv</button>
+            </form>
+        </div>
+        <table-- style="width:100%;" border="1" solid="#444444">
+            <tr align="middle">
+                <th>날짜</th>
+                <th>콘텐츠(종)</th>
+                <th>거리(m)</th>
+                <th>난이도</th>
+                <th>수행시간(초)</th>
+                <th>성공률(양발, %)</th>
+                <th>성공률(좌, %)</th>
+                <th>성공률(우, %)</th>
+                <th>기타 정보1</th>
+                <th>기타 정보2</th>
+                <th>중간저장여부</th>
+                <th>보폭(mm)</th>
+                <th>보행너비</th>
+            </tr>
+            {% for row in result_list %}
+            <tr align="right">
+                {% for data in row %}
+                {% if loop.index <= 13 %} {# 진자는 인덱스가 1부터 시작한다! #}
+                    <td>{{ data }}</td>
+                {% endif %}
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table-->
+    </div>
+</body>
+</html>
